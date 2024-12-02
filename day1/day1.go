@@ -48,7 +48,15 @@ func main() {
 		distances = append(distances, aocutils.Abs(id1 - id2));
 	}
 
-	answer := aocutils.ArrayReduce(distances, 0, func(element, index, acc int) int { return element + acc });
+	answer1 := aocutils.ArrayReduce(distances, 0, func(element, _, acc int) int { return element + acc });
+	fmt.Println("Answer (Part 1): " + strconv.Itoa(answer1));
 
-	fmt.Println("Answer: " + strconv.Itoa(answer));
+	var similarities []int;
+	for _, id1 := range group1 {
+		duplicates := aocutils.ArrayFilter(group2, func(id2, _ int) bool { return id1 == id2; });
+		similarities = append(similarities, id1 * len(duplicates));
+	}
+
+	answer2 := aocutils.ArrayReduce(similarities, 0, func(element, _, acc int) int { return element + acc });
+	fmt.Println("Answer (Part 2): " + strconv.Itoa(answer2));
 }
