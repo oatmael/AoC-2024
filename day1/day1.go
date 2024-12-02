@@ -35,6 +35,19 @@ func main() {
 		group2 = append(group2, id2);
 	}
 
+	testGroup1 := []int{3, 4, 2, 1, 3, 3};
+	testGroup2 := []int{4, 3, 5, 3, 9, 3};
+
+	testAnswer1, testAnswer2 := processGroups(testGroup1, testGroup2);
+	fmt.Println("Test (Part 1): " + strconv.Itoa(testAnswer1));
+	fmt.Println("Test (Part 2): " + strconv.Itoa(testAnswer2));
+
+	answer1, answer2 := processGroups(group1, group2);
+	fmt.Println("Answer (Part 1): " + strconv.Itoa(answer1));
+	fmt.Println("Answer (Part 2): " + strconv.Itoa(answer2));
+}
+
+func processGroups(group1 []int, group2 []int) (int, int) {
 	slices.SortFunc(group1, func (a, b int) int { return a - b; });
 	slices.SortFunc(group2, func (a, b int) int { return a - b; });
 
@@ -49,7 +62,6 @@ func main() {
 	}
 
 	answer1 := aocutils.ArrayReduce(distances, 0, func(element, _, acc int) int { return element + acc });
-	fmt.Println("Answer (Part 1): " + strconv.Itoa(answer1));
 
 	var similarities []int;
 	for _, id1 := range group1 {
@@ -58,5 +70,6 @@ func main() {
 	}
 
 	answer2 := aocutils.ArrayReduce(similarities, 0, func(element, _, acc int) int { return element + acc });
-	fmt.Println("Answer (Part 2): " + strconv.Itoa(answer2));
+	
+	return answer1, answer2;
 }
