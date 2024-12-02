@@ -3,7 +3,7 @@ package aocutils
 func ArrayReduce[T ~[]TElement, TElement any, Acc any](
 	array T, 
 	initial Acc, 
-	callback func(element TElement, index int, acc Acc) Acc,
+	callback func(TElement, int, Acc) Acc,
 ) Acc {
 	var acc Acc;
 	acc = initial;
@@ -15,10 +15,10 @@ func ArrayReduce[T ~[]TElement, TElement any, Acc any](
 	return acc;
 }
 
-func ArrayMap[T ~[]TElement, TElement any, M ~[]MElement, MElement any](
+func ArrayMap[T ~[]TElement, TElement any, MElement any](
 	array T,
-	callback func(element TElement, index int) MElement,
-) M {
+	callback func(TElement, int) MElement,
+) []MElement {
 	var mapped []MElement;
 
 	for i, element := range array {
@@ -30,7 +30,7 @@ func ArrayMap[T ~[]TElement, TElement any, M ~[]MElement, MElement any](
 
 func ArrayFilter[T ~[]TElement, TElement any](
 	array T, 
-	callback func (element TElement, index int) bool,
+	callback func (TElement, int) bool,
 ) T {
 	var filtered []TElement;
 
